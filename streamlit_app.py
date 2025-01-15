@@ -51,6 +51,7 @@ def plotNetwork(df, node_scaler, node_shape):
     )
     
     st.write('   ')
+    st.download_button('xxx')
 
     
 ### MAIN SCRIPT ################################################
@@ -99,9 +100,9 @@ if uploaded_file is not None:
         
         plotNetwork(df, node_scaler, node_shape)
         
-        #st.write()
-        #st.write()
-        #st.dataframe(df, width = 777)
+        st.write()
+        st.write()
+        st.dataframe(df, width = 777)
         
         
                 
