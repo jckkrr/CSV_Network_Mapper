@@ -50,7 +50,7 @@ def plotNetwork(df, node_scaler, node_shape):
     
     components.html(
         HtmlFile.read(), 
-        height = 550, 
+        height = 650, 
         width = 777
     )
     
