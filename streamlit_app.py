@@ -10,7 +10,6 @@ import plotly.graph_objects as go
 from pyvis.network import Network
 import pyvis
 
-st.write('hello_______world')
 
 ### FUNCTIONS ################################################
 
