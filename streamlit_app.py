@@ -34,7 +34,7 @@ def plotNetwork(df, node_scaler, node_shape):
                    size = int(df_nodes.loc[node, 'count'] * node_scaler), 
                    color = df_nodes.loc[node, 'rgba'],
                    shape = node_shape,
-                   font = (f'10 Manrope black')
+                   font = (f'14 Manrope black')
                   )
         
     ### Add edges
@@ -50,17 +50,20 @@ def plotNetwork(df, node_scaler, node_shape):
     
     components.html(
         HtmlFile.read(), 
-        height = 650, 
+        height = 550, 
         width = 777
     )
     
-    downloadable_html = g.generate_html(g.save_graph(f'temp.html'))      
+    downloadable_html = g.generate_html(g.save_graph(f'temp.html'))
+    downloadable_html = downloadable_html.replace('height: 500px', 'height: 100%')   
+    downloadable_html = downloadable_html.replace('border: 1px solid lightgray', 'border: 0px solid lightgray') # removes border that otherwise appears
+    downloadable_html = downloadable_html.replace('background-color:rgba(200,200,200,0.8)', 'background: linear-gradient(to bottom right, #99ffcc 0%, #ffffcc 100%);')
     
     st.download_button(
-        label = "Download data as CSV",
+        label = "For easier analysis, download as HTML",
         data = downloadable_html,
         file_name = "downloadable_html.html",
-        mime = "text/csv",
+        mime = "application/octet-stream",
     )
     
 ### MAIN SCRIPT ################################################
