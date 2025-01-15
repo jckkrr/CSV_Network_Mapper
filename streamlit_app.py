@@ -46,17 +46,9 @@ def plotNetwork(df, node_scaler, node_shape):
     
     components.html(
         HtmlFile.read(), 
-        height = 500, 
+        height = 100, 
         width = 777
     )
-    
-    st.download_button(
-        label = "Download data as HTML",
-        data = components.html,
-        file_name = "xxx.csv",
-        mime = "application/octet-stream",
-    )
-
     
 ### MAIN SCRIPT ################################################
 
