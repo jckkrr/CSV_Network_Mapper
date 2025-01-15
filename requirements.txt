@@ -1,6 +1,5 @@
 numpy
 pandas
-streamlit
 pyvis
 math 
 networkx
