@@ -12,6 +12,39 @@ import pyvis
 
 st.write('hello___world')
 
+### FUNCTIONS ################################################
+
+def plotNetwork(df, node_scaler, node_shape):
+    
+    g = pyvis.network.Network(directed=False, width='100%')
+    
+    ###
+    
+    df_nodes = pd.concat([df['node_left'], df['node_right']]).value_counts().to_frame().rename(columns = {0: 'count'})
+    df_nodes['count'] = df_nodes['count'] / df_nodes['count'].max() # Normalise. Scaling happens when node is added
+    #df_nodes['count'] = df_nodes['count'].astype(float)
+    df_nodes['rgba'] = df_nodes["count"].apply(lambda x:  f'rgba(100, 100, {x * 255}, 1') #     f'0,0,{ * 255},1'
+    nodes_unique = list(df_nodes.index)
+    
+    ### Add nodes
+    for node in nodes_unique:
+        g.add_node(node, 
+                   size = int(df_nodes.loc[node, 'count'] * node_scaler), 
+                   color = df_nodes.loc[node, 'rgba'],
+                   shape = node_shape
+                  )
+        
+    ### Add edges
+    for index, row in df.iterrows():
+        g.add_edge(row['node_left'], row['node_right'])
+        
+    ### Display   
+    path = '/tmp'
+    g.save_graph(f'temp.html')
+    HtmlFile = open(f'temp.html', 'r', encoding='utf-8')
+    components.html(HtmlFile.read(), height=570)
+    
+    
 ### MAIN SCRIPT ################################################
 
 required_columns = ['node_left', 'connection', 'node_right']
