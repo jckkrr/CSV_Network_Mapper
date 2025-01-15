@@ -50,6 +50,8 @@ def plotNetwork(df, node_scaler, node_shape):
         height = 400, 
         width = 777
     )
+    
+    st.write('   ')
 
     
 ### MAIN SCRIPT ################################################
