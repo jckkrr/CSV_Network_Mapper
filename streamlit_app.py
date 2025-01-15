@@ -33,7 +33,8 @@ def plotNetwork(df, node_scaler, node_shape):
         g.add_node(node, 
                    size = int(df_nodes.loc[node, 'count'] * node_scaler), 
                    color = df_nodes.loc[node, 'rgba'],
-                   shape = node_shape
+                   shape = node_shape,
+                   font=(f'10 Manrope black')
                   )
         
     ### Add edges
