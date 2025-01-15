@@ -40,8 +40,10 @@ def plotNetwork(df, node_scaler, node_shape):
     ### Add edges
     for index, row in df.iterrows():
         g.add_edge(row['node_left'], row['node_right'], color = 'lightblue')
-        
+      
+    
     ### Display   
+      
     path = '/tmp'
     g.save_graph(f'temp.html')
     HtmlFile = open(f'temp.html', 'r', encoding='utf-8')
@@ -50,6 +52,15 @@ def plotNetwork(df, node_scaler, node_shape):
         HtmlFile.read(), 
         height = 650, 
         width = 777
+    )
+    
+    downloadable_html = g.generate_html(g.save_graph(f'temp.html'))      
+    
+    st.download_button(
+        label = "Download data as CSV",
+        data = downloadable_html,
+        file_name = "downloadable_html.html",
+        mime = "text/csv",
     )
     
 ### MAIN SCRIPT ################################################
