@@ -40,21 +40,21 @@ if uploaded_file is not None:
         df = df[required_columns]
         
         
-        #col1, col2 = st.columns(2)
+        col1, col2 = st.columns(2)
 
-        #with col1:
-        #    st.checkbox("Disable formatting", key="disabled")
+        with col1:
+            st.checkbox("Disable formatting", key="disabled")
 
-        #with col2:
-        #    node_shape = st.radio(
-        #        "Node shape",
-        #        ["dot", "square", "diamond"],
-        #        disabled=st.session_state.disabled,
-        #    )
+        with col2:
+            node_shape = st.radio(
+                "Node shape",
+                ["dot", "square", "diamond"],
+                disabled=st.session_state.disabled,
+            )
         
-         #   node_scaler = st.slider("Node scaler", 0, 50, 10, disabled=st.session_state.disabled,)
+            node_scaler = st.slider("Node scaler", 0, 50, 10, disabled=st.session_state.disabled,)
         
-        # plotNetwork(df, node_scaler, node_shape)
+        plotNetwork(df, node_scaler, node_shape)
         
         st.dataframe(df)  
         
