@@ -50,7 +50,6 @@ def plotNetwork(df, node_scaler, node_shape):
         width = 777
     )
     
-    st.write('   ')
     st.download_button(
         label = "Download data as HTML",
         data = HtmlFile,
