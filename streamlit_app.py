@@ -25,7 +25,7 @@ def plotNetwork(df, node_scaler, node_shape):
     
     df_nodes = pd.concat([df['node_left'], df['node_right']]).value_counts().to_frame().rename(columns = {0: 'count'})
     df_nodes['count'] = df_nodes['count'] / df_nodes['count'].max() # Normalise. Scaling happens when node is added
-    df_nodes['rgba'] = df_nodes["count"].apply(lambda x:  f'rgba(100, 100, {x * 255}, 1') #     f'0,0,{ * 255},1'
+    df_nodes['rgba'] = df_nodes["count"].apply(lambda x:  f'rgba(100, 100, {x * 255}, 1')
     nodes_unique = list(df_nodes.index)
     
     ### Add nodes
@@ -34,7 +34,7 @@ def plotNetwork(df, node_scaler, node_shape):
                    size = int(df_nodes.loc[node, 'count'] * node_scaler), 
                    color = df_nodes.loc[node, 'rgba'],
                    shape = node_shape,
-                   font = (f'10 Manrope #191919')
+                   font = (f'10 Manrope black')
                   )
         
     ### Add edges
