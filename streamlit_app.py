@@ -7,10 +7,11 @@ import pandas as pd
 import streamlit as st
 import streamlit.components.v1 as components
 import plotly.graph_objects as go
-#from pyvis.network import Network
-#import pyvis
+from pyvis.network import Network
+import pyvis
 
 st.write('hello_world')
+
 ### MAIN SCRIPT ################################################
 
 required_columns = ['node_left', 'connection', 'node_right']
