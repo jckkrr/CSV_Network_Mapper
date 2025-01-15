@@ -18,6 +18,7 @@ def plotNetwork(df, node_scaler, node_shape):
     g = pyvis.network.Network(
         directed=False, 
         width = "100%", 
+        height = "110%", 
     )
     
     ###
