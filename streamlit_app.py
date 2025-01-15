@@ -52,8 +52,8 @@ def plotNetwork(df, node_scaler, node_shape):
     
     st.download_button(
         label = "Download data as HTML",
-        data = HtmlFile,
-        file_name = "large_df.csv",
+        data = g,
+        file_name = "xxx.csv",
         mime = "application/octet-stream",
     )
 
