@@ -19,6 +19,7 @@ def plotNetwork(df, node_scaler, node_shape):
         directed=False, 
         width = "100%", 
     )
+    g.force_atlas_2based(spring_length=3)
     
     ###
     
