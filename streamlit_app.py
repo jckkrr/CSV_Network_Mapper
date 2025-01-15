@@ -14,14 +14,16 @@ import pyvis
 ### FUNCTIONS ################################################
 
 def plotNetwork(df, node_scaler, node_shape):
-    
-    g = pyvis.network.Network(directed=False, width='100%')
+                
+    g = pyvis.network.Network(
+        directed=False, 
+        width = "100%", 
+    )
     
     ###
     
     df_nodes = pd.concat([df['node_left'], df['node_right']]).value_counts().to_frame().rename(columns = {0: 'count'})
     df_nodes['count'] = df_nodes['count'] / df_nodes['count'].max() # Normalise. Scaling happens when node is added
-    #df_nodes['count'] = df_nodes['count'].astype(float)
     df_nodes['rgba'] = df_nodes["count"].apply(lambda x:  f'rgba(100, 100, {x * 255}, 1') #     f'0,0,{ * 255},1'
     nodes_unique = list(df_nodes.index)
     
@@ -35,14 +37,19 @@ def plotNetwork(df, node_scaler, node_shape):
         
     ### Add edges
     for index, row in df.iterrows():
-        g.add_edge(row['node_left'], row['node_right'])
+        g.add_edge(row['node_left'], row['node_right'], color = 'lightblue')
         
     ### Display   
     path = '/tmp'
     g.save_graph(f'temp.html')
     HtmlFile = open(f'temp.html', 'r', encoding='utf-8')
-    components.html(HtmlFile.read(), height=570)
     
+    components.html(
+        HtmlFile.read(), 
+        height = 550, 
+        width = 777
+    )
+
     
 ### MAIN SCRIPT ################################################
 
@@ -71,26 +78,28 @@ if uploaded_file is not None:
 
         df = df[required_columns]
         
-        
         col1, col2 = st.columns(2)
 
         with col1:
-            st.checkbox("Disable formatting", key="disabled")
+             
+            st.write(' ')
+            #st.checkbox("Disable formatting", key="disabled")
 
         with col2:
+                    
             node_shape = st.radio(
                 "Node shape",
                 ["dot", "square", "diamond"],
-                disabled=st.session_state.disabled,
+                #isabled=st.session_state.disabled,
             )
         
-            node_scaler = st.slider("Node scaler", 0, 50, 10, disabled=st.session_state.disabled,)
+            node_scaler = st.slider("Node scaler", 0, 50, 10)
         
         plotNetwork(df, node_scaler, node_shape)
         
         st.write()
         st.write()
-        st.dataframe(df)  
+        st.dataframe(df, width = 777)
         
         
                 
