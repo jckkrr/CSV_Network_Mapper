@@ -52,7 +52,7 @@ def plotNetwork(df, node_scaler, node_shape):
     
     st.download_button(
         label = "Download data as HTML",
-        data = g,
+        data = g.save_graph(f'temp.html'),
         file_name = "xxx.csv",
         mime = "application/octet-stream",
     )
