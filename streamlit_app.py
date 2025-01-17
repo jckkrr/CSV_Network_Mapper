@@ -14,6 +14,7 @@ css = 'h1 {font-family: "Manrope", sans-serif;} body, html, p, [class*="css"] {f
 
 st.markdown( f'<style>{css}</style>' , unsafe_allow_html= True)
     
+    
 ### FUNCTIONS ################################################
 
 def plotNetwork(df, node_scaler, node_shape):
@@ -75,6 +76,8 @@ def plotNetwork(df, node_scaler, node_shape):
         mime = "application/octet-stream",
     )
     
+    
+    
 ### MAIN SCRIPT ################################################
 
 required_columns = ['node_left', 'connection', 'node_right']
@@ -125,8 +128,4 @@ if uploaded_file is not None:
         st.write()
         st.dataframe(df, width = 777)
         
-        
-                
-                
-
-
+#### END ##########################
