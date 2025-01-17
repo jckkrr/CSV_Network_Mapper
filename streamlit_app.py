@@ -10,64 +10,87 @@ import plotly.graph_objects as go
 from pyvis.network import Network
 import pyvis
 
-css = 'body, html, p, h1, .st-emotion-cache-1104ytp h1, [class*="css"] {font-family: "Inter", sans-serif;} '
-
+css = 'body, html, p, h1, .st-emotion-cache-1104ytp h1, [class*="css"] {font-family: "Inter", sans-serif;}'
 st.markdown( f'<style>{css}</style>' , unsafe_allow_html= True)
-    
+
     
 ### FUNCTIONS ################################################
 
-def plotNetwork(df, node_scaler, node_shape):
+def plotNetwork(df, plot_formatting):
                 
     g = pyvis.network.Network(
         directed=False, 
         width = "100%", 
     )
+    pyvis.options.Layout(improvedLayout=True)    
     g.force_atlas_2based(spring_length=3)
     
-    ###
+    ### NODES
+    ### 1. Collate list of nodes, then prepare them
+     
+    palette = {
+        'primary': 'rgba(102, 99, 236, 1)', 
+        'secondary': 'rgba(0, 150, 25, 1)',
+        'tertiary': 'rgba(0, 150, 25, 1)',
+        'blank_image': 'https://upload.wikimedia.org/wikipedia/commons/a/a7/Blank_image.jpg',
+    }
     
-    df_nodes = pd.concat([df['node_left'], df['node_right']]).value_counts().to_frame().rename(columns = {0: 'count'})
-    df_nodes['count'] = df_nodes['count'] / df_nodes['count'].max() # Normalise. Scaling happens when node is added
-    df_nodes['rgba'] = df_nodes["count"].apply(lambda x:  f'rgba(100, 100, {x * 255}, 1')
+    df_nodes = pd.concat([df['node_left'], df['node_right']]).value_counts().to_frame().rename(columns = {0: 'proportion'})
+    df_nodes['proportion'] = df_nodes['proportion'] / df_nodes['proportion'].max() # Normalise. Scaling happens when node is added
+    df_nodes['size'] = df_nodes['proportion'] * plot_formatting['node_scaler']
+        
+    def styleNode(styling_column, style_high, style_mid, sytle_low): 
+        df_nodes[styling_column] = np.where(df_nodes['proportion'] > 0.66, style_high, np.where(df_nodes['proportion'] > 0.33, style_mid, sytle_low))
+    
+    styleNode('rgba', palette['primary'], palette['secondary'], palette['tertiary'])
+    styleNode('shape', plot_formatting['node_shape'], plot_formatting['node_shape'], 'circularImage')
+    styleNode('image', '', '', palette['blank_image']) ### This is used for making the small nodes look like empty rings. Works in combination with 'circularImages' shape.
+    df_nodes['font_size'] = 10 + (df_nodes['proportion'] * 15)
+    
+    ### 2. Add the nodes to graphic
+    
     nodes_unique = list(df_nodes.index)
-    
-    ### Add nodes
     for node in nodes_unique:
         g.add_node(node, 
-                   size = int(df_nodes.loc[node, 'count'] * node_scaler), 
+                   size = df_nodes.loc[node, 'size'], 
                    color = df_nodes.loc[node, 'rgba'],
-                   shape = node_shape,
-                   font = (f'14 Manrope black')
+                   shape = df_nodes.loc[node, 'shape'],
+                   image = df_nodes.loc[node, 'image'],
+                   font = (f'{df_nodes.loc[node, "font_size"]} Manrope black')
                   )
         
-    ### Add edges
+    ### EDGES
     for index, row in df.iterrows():
-        g.add_edge(row['node_left'], row['node_right'], color = 'lightblue')
-      
+        g.add_edge(row['node_left'], row['node_right'], color = palette['secondary'])
     
-    ### Display   
+    ### DISPLAY   
       
     path = '/tmp'
     g.save_graph(f'temp.html')
     HtmlFile = open(f'temp.html', 'r', encoding='utf-8')
-    
     source_code = HtmlFile.read()
-    
     components.html(
         source_code, 
         height = 610, 
         width = 777
     )
     
-    source_code = source_code.replace('height: 600px', 'height: 1000')   
+    ### Make some slight improvements to the download graph
+    source_code = source_code.replace('height: 600px', 'height: 1000').replace('height: 500px', 'height: 1000')    
     source_code = source_code.replace('border: 1px solid lightgray', 'border: 0px solid lightgray') # removes border that otherwise appears
-    source_code = source_code.replace('background-color:rgba(200,200,200,0.8)', 'background: linear-gradient(to bottom right, #99ffcc 0%, #ffffcc 100%);')
-    
+    source_code = source_code.replace('background-color:rgba(200,200,200,0.8)', 'background: linear-gradient(to bottom right, #33ccff 0%, #ff99cc 100%);')
     source_code = source_code.replace(
         '</style>', 
         '<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;900&display=swap"></style>'
     )
+    source_code = source_code.replace(
+        '<body>', 
+        f'<body><span style="font-family: Manrope; font-size: 24px; font-weight:600">{plot_formatting["title"]}</span><br> \
+            <span style="font-family: Inter; font-size: 14px;"><b>Open Investigation Tools</b> | <a href="http://www.constituent.au" style="color:#000000;">constituent.au</a></span>'
+    )
+    
+    
+    #<br><span style="font-family: Inter; font-size:12px">Key: <span style="color: rgba(125,125,222, 1)"> &#9632;</span> Company<span style="color: rgba(0,150,100, 1)"> &#9632;</span> Person<span style="color: rgba(250,150,0, 1)"> &#9632;</span> Highlighted<span style="color: rgba(170,170,222, 1)"> &#9632;</span> Inactive company<span style="color: rgba(170,222,170, 1)"> &#9632;</span> Inactive person | Unfilled nodes = not scanned for further connections </span>
     
     st.download_button(
         label = "For easier analysis, download as HTML",
@@ -87,8 +110,11 @@ st.markdown("**Open Investigation Tools** | [constituent.au](%s)" % 'http://www.
 st.title('CSV Network Mapper')
 st.write('A drag and drop network mapper. Makes network mapping easy.')
 
-uploaded_file = st.file_uploader("Upload file here &#x2935;", type={"csv"}) 
-if uploaded_file is not None:
+uploaded_file = st.file_uploader("Upload file here &#x2935;", type={"csv"})
+if uploaded_file:
+#if uploaded_file is not None:
+
+    file_name = uploaded_file.name
     
     df = pd.read_csv(uploaded_file)
     
@@ -122,7 +148,8 @@ if uploaded_file is not None:
         
             node_scaler = st.slider("Node scaler", 0, 50, 10)
         
-        plotNetwork(df, node_scaler, node_shape)
+        plot_formatting = {'title': file_name, 'node_scaler': node_scaler, 'node_shape': node_shape}
+        plotNetwork(df, plot_formatting)
         
         st.write()
         st.write()
