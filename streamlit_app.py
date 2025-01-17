@@ -61,8 +61,8 @@ def plotNetwork(df, plot_formatting):
                    size = df_nodes.loc[node, 'size'], 
                    color = df_nodes.loc[node, 'rgba'],
                    shape = df_nodes.loc[node, 'shape'],
-                   #image = df_nodes.loc[node, 'image'],
-                   #font = (f'{df_nodes.loc[node, "font_size"]} Manrope black')
+                   image = df_nodes.loc[node, 'image'],
+                   font = (f'{df_nodes.loc[node, "font_size"]} Manrope black')
                   )
         
     ### EDGES
@@ -70,7 +70,15 @@ def plotNetwork(df, plot_formatting):
         g.add_edge(row['node_left'], row['node_right'], color = palette['secondary'])
     
     #### DISPLAY REMOVED TEMPORARILY
-    
+    path = '/tmp'
+    g.save_graph(f'temp.html')
+    HtmlFile = open(f'temp.html', 'r', encoding='utf-8')
+    source_code = HtmlFile.read()
+    components.html(
+        source_code, 
+        height = int(610), 
+        width = int(777)
+    )
     
     
 ### MAIN SCRIPT ################################################
