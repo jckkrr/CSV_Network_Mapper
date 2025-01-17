@@ -38,9 +38,8 @@ def plotNetwork(df, plot_formatting):
     df_nodes = pd.concat([df['node_left'], df['node_right']]).value_counts().to_frame().rename(columns = {0: 'count'})
     
     df_nodes['proportion'] = df_nodes['count'] / df_nodes['count'].max() # Normalise. Scaling happens when node is added
-    #df_nodes['size'] = df_nodes['proportion'] * plot_formatting['node_scaler']
-    df_nodes['size'] = 10
-        
+    df_nodes['size'] = df_nodes['proportion'] * plot_formatting['node_scaler']
+    
     def styleNode(styling_column, style_high, style_mid, sytle_low): 
         df_nodes[styling_column] = np.where(df_nodes['proportion'] > 0.66, style_high, np.where(df_nodes['proportion'] > 0.33, style_mid, sytle_low))
     
