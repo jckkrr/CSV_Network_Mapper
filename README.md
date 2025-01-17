@@ -1,6 +1,6 @@
 # CSV Network Mapper
 
-**_Load a CSV of data; receive an interactive network map._** <Br>
+**A drag and drop network mapper. Makes network mapping easy as.** <Br>
 Use it now: https://constituent--csvnetworkmapper.streamlit.app/ <Br><Br>
 
 ![image](https://github.com/user-attachments/assets/07486a28-1c5c-479b-bb79-d55e6863a137)
@@ -10,7 +10,8 @@ Network maps are data visualisations that show the connections between entities 
 
 CSV stands for Comma Seperated File. They are simply a very plain and stripped back version of a spreadsheet you might make in Microsoft Excel or Google Sheets, and these programs let you export your work as a CSV.
 
-What this app does is let make it dead-easy to visualise the connections you have in spreadsheet. All you need to do is drag and drop a CSV. That's it. Code-free analysis to help curious folk like you see what's really going on. 
+What this app does is let make it dead-easy to visualise the connections you have in spreadsheet. Load a CSV of data; receive an interactive network map. That's it. Code-free analysis to help curious folk like you see what's really going on. 
+
 
 ## It's this easy to use...
 
