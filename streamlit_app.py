@@ -54,10 +54,10 @@ def plotNetwork(df, node_scaler, node_shape):
         width = 777
     )
     
-    downloadable_html = g.save_graph(f'temp.html')
-    st.write(type(downloadable_html))
-    #x = g.save_graph(f'temp.html')
-    #downloadable_html = g.generate_html(x)
+    #downloadable_html = g.save_graph(f'temp.html')
+    #st.write(type(downloadable_html))
+    x = g.save_graph(f'temp.html')
+    downloadable_html = g.generate_html(x)
     #st.write(type(downloadable_html))
     #downloadable_html = downloadable_html.replace('height: 500px', 'height: 100%')   
     #downloadable_html = downloadable_html.replace('border: 1px solid lightgray', 'border: 0px solid lightgray') # removes border that otherwise appears
