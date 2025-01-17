@@ -43,7 +43,7 @@ def plotNetwork(df, plot_formatting):
     def styleNode(styling_column, style_high, style_mid, sytle_low): 
         df_nodes[styling_column] = np.where(df_nodes['proportion'] > 0.66, style_high, np.where(df_nodes['proportion'] > 0.33, style_mid, sytle_low))
     
-    #styleNode('rgba', palette['primary'], palette['secondary'], palette['tertiary'])
+    styleNode('rgba', palette['primary'], palette['secondary'], palette['tertiary'])
     #styleNode('shape', plot_formatting['node_shape'], plot_formatting['node_shape'], 'circularImage')
     #styleNode('image', '', '', palette['blank_image']) ### This is used for making the small nodes look like empty rings. Works in combination with 'circularImages' shape.
     #df_nodes['font_size'] = 10 + (df_nodes['proportion'] * 15)
