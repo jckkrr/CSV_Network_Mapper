@@ -58,9 +58,9 @@ def plotNetwork(df, plot_formatting):
         #st.write(df_nodes.loc[node])
         
         g.add_node(node, 
-                   #size = df_nodes.loc[node, 'size'], 
-                   #color = df_nodes.loc[node, 'rgba'],
-                   #shape = df_nodes.loc[node, 'shape'],
+                   size = df_nodes.loc[node, 'size'], 
+                   color = df_nodes.loc[node, 'rgba'],
+                   shape = df_nodes.loc[node, 'shape'],
                    #image = df_nodes.loc[node, 'image'],
                    #font = (f'{df_nodes.loc[node, "font_size"]} Manrope black')
                   )
