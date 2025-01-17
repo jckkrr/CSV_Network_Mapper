@@ -69,7 +69,8 @@ def plotNetwork(df, plot_formatting):
     for index, row in df.iterrows():
         g.add_edge(row['node_left'], row['node_right'], color = palette['secondary'])
     
-    #### DISPLAY REMOVED TEMPORARILY
+    ### DISPLAY   
+      
     path = '/tmp'
     g.save_graph(f'temp.html')
     HtmlFile = open(f'temp.html', 'r', encoding='utf-8')
@@ -78,6 +79,27 @@ def plotNetwork(df, plot_formatting):
         source_code, 
         height = int(610), 
         width = int(777)
+    )
+    
+    ### Make some slight improvements to the download graph
+    source_code = source_code.replace('height: 600px', 'height: 1000').replace('height: 500px', 'height: 1000')    
+    source_code = source_code.replace('border: 1px solid lightgray', 'border: 0px solid lightgray') # removes border that otherwise appears
+    source_code = source_code.replace('background-color:rgba(200,200,200,0.8)', 'background: linear-gradient(to bottom right, #33ccff 0%, #ff99cc 100%);')
+    source_code = source_code.replace(
+        '</style>', 
+        '<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;900&display=swap"></style>'
+    )
+    source_code = source_code.replace(
+        '<body>', 
+        f'<body><span style="font-family: Manrope; font-size: 24px; font-weight:600">{plot_formatting["title"]}</span><br> \
+            <span style="font-family: Inter; font-size: 14px;"><b>Open Investigation Tools</b> | <a href="http://www.constituent.au" style="color:#000000;">constituent.au</a></span>'
+    )
+    
+    st.download_button(
+        label = "For easier analysis, download as HTML",
+        data = source_code,
+        file_name = "downloadable_html.html",
+        mime = "application/octet-stream",
     )
     
     
