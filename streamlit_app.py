@@ -50,10 +50,15 @@ def plotNetwork(df, plot_formatting):
     #styleNode('image', '', '', palette['blank_image']) ### This is used for making the small nodes look like empty rings. Works in combination with 'circularImages' shape.
     #df_nodes['font_size'] = 10 + (df_nodes['proportion'] * 15)
     
+    st.dataframe(df_nodes, width = 777)
+    
     ### 2. Add the nodes to graphic
     
     nodes_unique = list(df_nodes.index)
     for node in nodes_unique:
+        
+        st.write(df_nodes.loc[node])
+        
         g.add_node(node, 
                    #size = df_nodes.loc[node, 'size'], 
                    #color = df_nodes.loc[node, 'rgba'],
