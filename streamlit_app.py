@@ -36,29 +36,30 @@ def plotNetwork(df, plot_formatting):
     }
     
     df_nodes = pd.concat([df['node_left'], df['node_right']]).value_counts().to_frame().rename(columns = {0: 'proportion'})
+    
     #df_nodes['proportion'] = df_nodes['proportion'] / df_nodes['proportion'].max() # Normalise. Scaling happens when node is added
     #df_nodes['size'] = df_nodes['proportion'] * plot_formatting['node_scaler']
      
-    df_nodes['size'] = 10
+    ### df_nodes['size'] = 10
         
     def styleNode(styling_column, style_high, style_mid, sytle_low): 
         df_nodes[styling_column] = np.where(df_nodes['proportion'] > 0.66, style_high, np.where(df_nodes['proportion'] > 0.33, style_mid, sytle_low))
     
-    styleNode('rgba', palette['primary'], palette['secondary'], palette['tertiary'])
+    #styleNode('rgba', palette['primary'], palette['secondary'], palette['tertiary'])
     styleNode('shape', plot_formatting['node_shape'], plot_formatting['node_shape'], 'circularImage')
-    styleNode('image', '', '', palette['blank_image']) ### This is used for making the small nodes look like empty rings. Works in combination with 'circularImages' shape.
-    df_nodes['font_size'] = 10 + (df_nodes['proportion'] * 15)
+    #styleNode('image', '', '', palette['blank_image']) ### This is used for making the small nodes look like empty rings. Works in combination with 'circularImages' shape.
+    #df_nodes['font_size'] = 10 + (df_nodes['proportion'] * 15)
     
     ### 2. Add the nodes to graphic
     
     nodes_unique = list(df_nodes.index)
     for node in nodes_unique:
         g.add_node(node, 
-                   size = df_nodes.loc[node, 'size'], 
-                   color = df_nodes.loc[node, 'rgba'],
+                   #size = df_nodes.loc[node, 'size'], 
+                   #color = df_nodes.loc[node, 'rgba'],
                    shape = df_nodes.loc[node, 'shape'],
-                   image = df_nodes.loc[node, 'image'],
-                   font = (f'{df_nodes.loc[node, "font_size"]} Manrope black')
+                   #image = df_nodes.loc[node, 'image'],
+                   #font = (f'{df_nodes.loc[node, "font_size"]} Manrope black')
                   )
         
     ### EDGES
