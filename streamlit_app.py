@@ -40,7 +40,7 @@ def plotNetwork(df, plot_formatting):
     #df_nodes['proportion'] = df_nodes['proportion'] / df_nodes['proportion'].max() # Normalise. Scaling happens when node is added
     #df_nodes['size'] = df_nodes['proportion'] * plot_formatting['node_scaler']
      
-    ### df_nodes['size'] = 10
+    df_nodes['size'] = 10
         
     def styleNode(styling_column, style_high, style_mid, sytle_low): 
         df_nodes[styling_column] = np.where(df_nodes['proportion'] > 0.66, style_high, np.where(df_nodes['proportion'] > 0.33, style_mid, sytle_low))
@@ -57,7 +57,7 @@ def plotNetwork(df, plot_formatting):
     nodes_unique = list(df_nodes.index)
     for node in nodes_unique:
         
-        st.write(df_nodes.loc[node])
+        #st.write(df_nodes.loc[node])
         
         g.add_node(node, 
                    #size = df_nodes.loc[node, 'size'], 
