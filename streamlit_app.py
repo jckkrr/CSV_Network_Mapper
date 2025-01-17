@@ -10,7 +10,7 @@ import plotly.graph_objects as go
 from pyvis.network import Network
 import pyvis
 
-css = 'h1 {font-family: "Inter", sans-serif;} body {font-family: "Manrope", sans-serif;} '
+css = 'h1 {font-family: "Inter", sans-serif;} body, p {font-family: "Manrope", sans-serif;} '
 
 st.markdown( f'<style>{css}</style>' , unsafe_allow_html= True)
     
