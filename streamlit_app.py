@@ -60,6 +60,11 @@ def plotNetwork(df, node_scaler, node_shape):
     source_code = source_code.replace('border: 1px solid lightgray', 'border: 0px solid lightgray') # removes border that otherwise appears
     source_code = source_code.replace('background-color:rgba(200,200,200,0.8)', 'background: linear-gradient(to bottom right, #99ffcc 0%, #ffffcc 100%);')
     
+    source_code = source_code.replace(
+        '</style>', 
+        '<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;900&display=swap"></style>'
+    )
+    
     st.download_button(
         label = "For easier analysis, download as HTML",
         data = source_code,
