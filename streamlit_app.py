@@ -68,15 +68,17 @@ def plotNetwork(df, plot_formatting):
     path = '/tmp'
     g.save_graph(f'temp.html')
     HtmlFile = open(f'temp.html', 'r', encoding='utf-8')
+    
     source_code = HtmlFile.read()
+    
     components.html(
         source_code, 
-        height = 610, 
-        width = 777
+        height = int(610), 
+        width = int(777)
     )
     
     ### Make some slight improvements to the download graph
-    source_code = source_code.replace('height: 600px', 'height: 1000').replace('height: 500px', 'height: 1000')    
+    #source_code = source_code.replace('height: 600px', 'height: 1000').replace('height: 500px', 'height: 1000')    
     #source_code = source_code.replace('border: 1px solid lightgray', 'border: 0px solid lightgray') # removes border that otherwise appears
     #source_code = source_code.replace('background-color:rgba(200,200,200,0.8)', 'background: linear-gradient(to bottom right, #33ccff 0%, #ff99cc 100%);')
     #source_code = source_code.replace(
@@ -141,8 +143,7 @@ if uploaded_file:
                     
             node_shape = st.radio(
                 "Node shape",
-                ["dot", "square", "diamond"],
-                #isabled=st.session_state.disabled,
+                ["square", "dot", "diamond"],
             )
         
             node_scaler = st.slider("Node scaler", 0, 50, 10)
