@@ -65,17 +65,17 @@ def plotNetwork(df, plot_formatting):
     
     ### DISPLAY   
       
-    path = '/tmp'
-    g.save_graph(f'temp.html')
-    HtmlFile = open(f'temp.html', 'r', encoding='utf-8')
+    #path = '/tmp'
+    #g.save_graph(f'temp.html')
+    #HtmlFile = open(f'temp.html', 'r', encoding='utf-8')
     
-    source_code = HtmlFile.read()
+    #source_code = HtmlFile.read()
     
-    components.html(
-        source_code, 
-        height = int(610), 
-        width = int(777)
-    )
+    #components.html(
+    #    source_code, 
+    #    height = int(610), 
+    #    width = int(777)
+    #)
     
     ### Make some slight improvements to the download graph
     #source_code = source_code.replace('height: 600px', 'height: 1000').replace('height: 500px', 'height: 1000')    
@@ -93,12 +93,12 @@ def plotNetwork(df, plot_formatting):
     
     
     
-    st.download_button(
-        label = "For easier analysis, download as HTML",
-        data = source_code,
-        file_name = "downloadable_html.html",
-        mime = "application/octet-stream",
-    )
+    #st.download_button(
+    #    label = "For easier analysis, download as HTML",
+    #    data = source_code,
+    #    file_name = "downloadable_html.html",
+    #    mime = "application/octet-stream",
+    #)
     
     
     
