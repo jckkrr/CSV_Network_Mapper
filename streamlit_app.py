@@ -50,15 +50,15 @@ def plotNetwork(df, node_scaler, node_shape):
     
     components.html(
         HtmlFile.read(), 
-        height = 650, 
+        height = 550, 
         width = 777
     )
     
     downloadable_html = g.save_graph(f'temp.html')
-    #downloadable_html = g.generate_html(g.save_graph(f'temp.html'))
-    #downloadable_html = downloadable_html.replace('height: 500px', 'height: 100%')   
-    #downloadable_html = downloadable_html.replace('border: 1px solid lightgray', 'border: 0px solid lightgray') # removes border that otherwise appears
-    #downloadable_html = downloadable_html.replace('background-color:rgba(200,200,200,0.8)', 'background: linear-gradient(to bottom right, #99ffcc 0%, #ffffcc 100%);')
+    downloadable_html = g.generate_html(g.save_graph(f'temp.html'))
+    downloadable_html = downloadable_html.replace('height: 500px', 'height: 100%')   
+    downloadable_html = downloadable_html.replace('border: 1px solid lightgray', 'border: 0px solid lightgray') # removes border that otherwise appears
+    downloadable_html = downloadable_html.replace('background-color:rgba(200,200,200,0.8)', 'background: linear-gradient(to bottom right, #99ffcc 0%, #ffffcc 100%);')
     
     st.download_button(
         label = "For easier analysis, download as HTML",
