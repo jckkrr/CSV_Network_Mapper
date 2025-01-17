@@ -10,7 +10,9 @@ import plotly.graph_objects as go
 from pyvis.network import Network
 import pyvis
 
-
+with open( "app\style.css" ) as css:
+    st.markdown( f'<style>{css.read()}</style>' , unsafe_allow_html= True)
+    
 ### FUNCTIONS ################################################
 
 def plotNetwork(df, node_scaler, node_shape):
