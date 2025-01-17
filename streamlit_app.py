@@ -77,20 +77,19 @@ def plotNetwork(df, plot_formatting):
     
     ### Make some slight improvements to the download graph
     source_code = source_code.replace('height: 600px', 'height: 1000').replace('height: 500px', 'height: 1000')    
-    source_code = source_code.replace('border: 1px solid lightgray', 'border: 0px solid lightgray') # removes border that otherwise appears
-    source_code = source_code.replace('background-color:rgba(200,200,200,0.8)', 'background: linear-gradient(to bottom right, #33ccff 0%, #ff99cc 100%);')
-    source_code = source_code.replace(
+    #source_code = source_code.replace('border: 1px solid lightgray', 'border: 0px solid lightgray') # removes border that otherwise appears
+    #source_code = source_code.replace('background-color:rgba(200,200,200,0.8)', 'background: linear-gradient(to bottom right, #33ccff 0%, #ff99cc 100%);')
+    #source_code = source_code.replace(
         '</style>', 
         '<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;900&display=swap"></style>'
     )
-    source_code = source_code.replace(
-        '<body>', 
-        f'<body><span style="font-family: Manrope; font-size: 24px; font-weight:600">{plot_formatting["title"]}</span><br> \
-            <span style="font-family: Inter; font-size: 14px;"><b>Open Investigation Tools</b> | <a href="http://www.constituent.au" style="color:#000000;">constituent.au</a></span>'
-    )
+    #source_code = source_code.replace(
+    #    '<body>', 
+    #    f'<body><span style="font-family: Manrope; font-size: 24px; font-weight:600">{plot_formatting["title"]}</span><br> \
+    #        <span style="font-family: Inter; font-size: 14px;"><b>Open Investigation Tools</b> | <a href="http://www.constituent.au" style="color:#000000;">constituent.au</a></span>'
+    #)
     
     
-    #<br><span style="font-family: Inter; font-size:12px">Key: <span style="color: rgba(125,125,222, 1)"> &#9632;</span> Company<span style="color: rgba(0,150,100, 1)"> &#9632;</span> Person<span style="color: rgba(250,150,0, 1)"> &#9632;</span> Highlighted<span style="color: rgba(170,170,222, 1)"> &#9632;</span> Inactive company<span style="color: rgba(170,222,170, 1)"> &#9632;</span> Inactive person | Unfilled nodes = not scanned for further connections </span>
     
     st.download_button(
         label = "For easier analysis, download as HTML",
