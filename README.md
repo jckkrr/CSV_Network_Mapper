@@ -2,8 +2,7 @@
 
 **A drag and drop network mapper. Makes network mapping easy as.** <Br>
 Use it now: https://constituent--csvnetworkmapper.streamlit.app/ <Br><Br>
-
-![image](https://github.com/user-attachments/assets/07486a28-1c5c-479b-bb79-d55e6863a137)
+![image](https://github.com/user-attachments/assets/f6874218-dc7a-4dc6-bca7-c9bddf4a510f)
 
 
 Network maps are data visualisations that show the connections between entities - be they people, place, things, or whatever else is on your radar. Because the human brain understands imagery more easily than spreadsheets, network maps are intuitive way of understanding who's who in the you-know-what. This makes them powerful pool for understanding power networks. Being visual and interactive, they are also fun to use (sorry, Excel). 
@@ -17,7 +16,7 @@ What this app does is let make it dead-easy to visualise the connections you hav
 
 Step 1: Open the [CSV Network Mapper](https://constituent--csvnetworkmapper.streamlit.app/) app (kindly hosted by Streamlit). <Br><Br>
 
-Step 2: Drag and drop your CSV. <Br><Br>
+Step 2: Drag and drop your CSV. (There's also an option to generate a random CSV.) <Br><Br>
 
 
 Step 3: Use the radio buttons and slider to do some simple formatting adjustments (but only if you feel like it) 
