@@ -90,7 +90,7 @@ def plotNetwork(df, plot_formatting):
     source_code = source_code.replace(
         '<body>', 
         f'<body><span style="font-family: Manrope; font-size: 24px; font-weight:600">{plot_formatting["title"]}</span><br> \
-            <span style="font-family: Inter; font-size: 14px;"><b>Open Investigation Tools</b> | <a href="http://www.constituent.au" style="color:#000000;">constituent.au</a></span>'
+            <span style="font-family: Inter; font-size: 14px;"><b>Open Investigation Tools</b> | <a href="http://www.constituent.online" style="color:#000000;">constituent.online</a></span>'
     )
     
     st.download_button(
@@ -124,7 +124,7 @@ def randomDataframe():
 
 required_columns = ['node_left', 'connection', 'node_right']
 
-st.markdown("**Open Investigation Tools** | [constituent.au](%s)" % 'http://www.constituent.au')
+st.markdown("**Open Investigation Tools** | [constituent.online](%s)" % 'http://www.constituent.online')
     
 st.title('CSV Network Mapper')
 st.write('A drag and drop network mapper. Makes network mapping easy.')
