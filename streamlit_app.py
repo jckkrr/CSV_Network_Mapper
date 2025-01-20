@@ -101,6 +101,25 @@ def plotNetwork(df, plot_formatting):
     )
     
     
+def randomDataframe():
+    
+    index_length = range(0, np.random.randint(10, 100))
+
+    names = ['Alice', 'Bob', 'Courtney', 'Dehlia', 'Emma', 'Fiona', 'Garry', 'Harry', 'Ian', 'Julia', 'Karen', 'Laurel', 'Michelle'] ## Plus 'Neville'
+    connection_type = ['likes', 'loves', 'knows', 'works with']
+
+    df = pd.DataFrame(
+        {'node_left': [names[np.random.randint(len(names))] for x in index_length], 
+         'connection': [connection_type[np.random.randint(len(connection_type))] for x in index_length], 
+         'node_right': [names[np.random.randint(len(names))] for x in index_length]}
+    )
+
+    df['node_right'] = np.where(df['node_right'] == df['node_left'], 'Neville', df['node_right'])
+
+    return df
+
+    
+    
 ### MAIN SCRIPT ################################################
 
 required_columns = ['node_left', 'connection', 'node_right']
@@ -111,8 +130,20 @@ st.title('CSV Network Mapper')
 st.write('A drag and drop network mapper. Makes network mapping easy.')
 
 uploaded_file = st.file_uploader("Upload file here &#x2935;", type={"csv"})
+
+if not uploaded_file:
+    
+    df_random = randomDataframe() .to_csv(index=False).encode('utf-8')
+    st.download_button(
+       '... or generate a random CSV test file to use.',
+       df_random,
+       "random_dataframe.csv",
+       "text/csv"
+    )
+
+
+
 if uploaded_file:
-#if uploaded_file is not None:
 
     file_name = uploaded_file.name
     
