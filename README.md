@@ -25,8 +25,8 @@ Step 3: Use the radio buttons and slider to do some simple formatting adjustment
 
 <Br><Br>
 Step 4: Explore your Network Map. 
+![image](https://github.com/user-attachments/assets/eefe6669-1bb8-4c8e-ab4b-f713190218ea)
 
-![image](https://github.com/user-attachments/assets/6b3872da-1bc4-4996-85e0-e591ffed94eb)
 
 <Br><Br>
 Step 5: Press the Download HTML button so you have a copy of your CSV Network Map for later on. This is also recommend when you are wanting to explore larger files. 
